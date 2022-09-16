@@ -1,0 +1,55 @@
+.game {
+    width: 440px;
+    height: 440px;
+}
+
+.top-row {
+    /* ADD CODE HERE 
+    
+    1. Use css grid to create 11 equally sized columns 
+    
+    */
+}
+
+.bottom-row {
+    /* ADD CODE HERE
+    
+    1. use css grid with 2 columns with a ratio of 1:10 
+    
+    */
+}
+
+.side-row {
+    /* ADD CODE HERE
+    
+    1. this should be 40px wide 
+    
+    */
+}
+
+.main {
+    /* ADD CODE HERE
+    
+    1. this should be 400px wide
+    2. use css grid with 10 equally sized columns
+    
+    */
+}
+
+.square {
+    margin: 0px;
+    height: 40px;
+    width: 40px;
+    background: gray;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.square > p {
+    color: white;
+}
+
+.hidden {
+    visibility: hidden
+}
