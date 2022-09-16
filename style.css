@@ -22,7 +22,7 @@
     */
 
     display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto ;
+    grid-template-columns: 1fr 10fr ;
 }
 
 .side-row {
@@ -41,6 +41,7 @@
     
     */
     display: grid;
+    width: 400px;
     grid-template-columns: auto auto auto auto auto auto auto auto auto auto ;
 }
 

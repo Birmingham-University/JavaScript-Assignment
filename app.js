@@ -27,7 +27,7 @@ function showQuestion() {
         1. insert the value of answers[currentQuestion] into the HTML element with id="num"
     */
 
-        document.getElementById('num').innerHTML = answers[currentQuestion]
+        document.getElementById('num').innerText = answers[currentQuestion]
 }
 
 function checkAnswer(i) { 
