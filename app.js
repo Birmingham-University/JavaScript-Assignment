@@ -18,7 +18,7 @@ function showMistakes() {
 
         1. insert the value of mistakes into the HTML element with id="mistakes"
     */
-
+    document.getElementById("mistakes").innerText = mistakes
 }
 
 function showQuestion() {
