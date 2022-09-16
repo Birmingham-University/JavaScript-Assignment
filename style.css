@@ -9,6 +9,9 @@
     1. Use css grid to create 11 equally sized columns 
     
     */
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto ;
+
 }
 
 .bottom-row {
@@ -17,6 +20,9 @@
     1. use css grid with 2 columns with a ratio of 1:10 
     
     */
+
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto ;
 }
 
 .side-row {
@@ -34,6 +40,8 @@
     2. use css grid with 10 equally sized columns
     
     */
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto ;
 }
 
 .square {
