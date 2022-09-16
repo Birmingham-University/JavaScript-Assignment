@@ -6,7 +6,7 @@ let currentQuestion = 0
 let answers = []
 for (let i = 1; i <= 10; i++) {
     for (let j = 1; j <= 10; j++) {
-        answers.push(i*j)
+        answers.push(i * j)
     }
 }
 
@@ -26,12 +26,12 @@ function showQuestion() {
 
         1. insert the value of answers[currentQuestion] into the HTML element with id="num"
     */
-
-        document.getElementById('num').innerText = answers[currentQuestion]
+    //console.log("showQuestion()")
+    document.getElementById('num').innerText = answers[currentQuestion]
 }
 
-function checkAnswer(i) { 
-    
+function checkAnswer(i) {
+
     // these three lines use the id of the button, i, to work out 
     // which row and column the button was
     let I = i - 1
@@ -39,7 +39,7 @@ function checkAnswer(i) {
     let col = (Math.floor(I / 10)) + 1
 
     let question = answers[currentQuestion]
-    
+
     /* ADD CODE HERE
     
         1. check if row*col == answers[currentQuestion]
@@ -51,12 +51,12 @@ function checkAnswer(i) {
                 1. add one to mistakes
                 2. call the showMistakes function
     */
-    if((row * col) == question) {
+    if ((row * col) == question) {
 
         let currentButton = document.getElementById(answers[question])
-        let newElement    = document.createElement("span")
+        let newElement = document.createElement("span")
 
-        const numAnswer   = document.createTextNode(answers[question])
+        const numAnswer = document.createTextNode(answers[question])
 
         newElement.appendChild(numAnswer)
 
@@ -78,12 +78,24 @@ function addEventListeners() {
           etc. 
     */
 
-    // loop through all elements in the DOM in order to get all the buttons withing 'main'
-    var x = document.getElementsByTagName("button");
+    // loop through all elements in the DOM in order to get all the buttons within 'main'
+    const x = document.getElementsByTagName("button");
+   
+    for (let i = 0; i < x.length; i++) {
 
-    for (var i = 0; i <= x.length; i++) {
-        console.log("Element " + i + " is a " + x[i].tagName);
-    }
+        console.log("Element " + i + " is a <" + x[i].tagName + ">")
+
+        document.getElementById(x[i].id).addEventListener("click", function() {
+           //console.log(i)
+           grade(i+1)
+        })
+     }
+}
+
+function grade(i) {
+
+    console.log("Inside 'function grade(" + i + ")'")
+
 }
 
 // run addEventListener Function
@@ -91,3 +103,4 @@ addEventListeners()
 
 // run showQuestion Function
 showQuestion()
+
