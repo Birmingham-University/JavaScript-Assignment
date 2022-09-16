@@ -18,6 +18,7 @@ function showMistakes() {
 
         1. insert the value of mistakes into the HTML element with id="mistakes"
     */
+
 }
 
 function showQuestion() {
@@ -25,6 +26,8 @@ function showQuestion() {
 
         1. insert the value of answers[currentQuestion] into the HTML element with id="num"
     */
+
+        document.getElementById('num').innerHTML = answers[currentQuestion]
 }
 
 function checkAnswer(i) { 
@@ -48,6 +51,7 @@ function checkAnswer(i) {
                 1. add one to mistakes
                 2. call the showMistakes function
     */
+
 }
 
 function addEventListeners() {
