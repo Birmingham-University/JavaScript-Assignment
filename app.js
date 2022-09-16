@@ -77,6 +77,13 @@ function addEventListeners() {
           button id="2" should call grade(2)
           etc. 
     */
+
+    // loop through all elements in the DOM in order to get all the buttons withing 'main'
+    var x = document.getElementsByTagName("button");
+
+    for (var i = 0; i <= x.length; i++) {
+        console.log("Element " + i + " is a " + x[i].tagName);
+    }
 }
 
 // run addEventListener Function
