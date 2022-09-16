@@ -51,7 +51,21 @@ function checkAnswer(i) {
                 1. add one to mistakes
                 2. call the showMistakes function
     */
+    if((row * col) == question) {
 
+        let currentButton = document.getElementById(answers[question])
+        let newElement    = document.createElement("span")
+
+        const numAnswer   = document.createTextNode(answers[question])
+
+        newElement.appendChild(numAnswer)
+
+        currentQuestion++
+        showQuestion()
+    } else {
+        mistakes++
+        showMistakes()
+    }
 }
 
 function addEventListeners() {
