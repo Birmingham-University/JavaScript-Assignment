@@ -61,6 +61,7 @@ function checkAnswer(i) {
         newElement.appendChild(numAnswer)
 
         currentQuestion++
+        //console.log("Correct!")
         showQuestion()
     } else {
         mistakes++
@@ -83,19 +84,13 @@ function addEventListeners() {
    
     for (let i = 0; i < x.length; i++) {
 
-        console.log("Element " + i + " is a <" + x[i].tagName + ">")
+        //console.log("Element " + i + " is a <" + x[i].tagName + ">")
 
         document.getElementById(x[i].id).addEventListener("click", function() {
            //console.log(i)
-           grade(i+1)
+           checkAnswer(i+1)
         })
      }
-}
-
-function grade(i) {
-
-    console.log("Inside 'function grade(" + i + ")'")
-
 }
 
 // run addEventListener Function
