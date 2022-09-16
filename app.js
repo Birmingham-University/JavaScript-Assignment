@@ -51,21 +51,23 @@ function checkAnswer(i) {
                 1. add one to mistakes
                 2. call the showMistakes function
     */
+
+    // Get ID of clicked button
+    let buttonPressed = document.getElementById(i)
+    console.log("ID of button pressed is '" + buttonPressed + "'")
+
+    let parent = buttonPressed.parentElement
+    
     if ((row * col) == question) {
-
-        let currentButton = document.getElementById(answers[question])
-        let newElement = document.createElement("span")
-
-        const numAnswer = document.createTextNode(answers[question])
-
-        newElement.appendChild(numAnswer)
-
+        buttonPressed.remove();
+        parent.innerHTML = question
         currentQuestion++
-        //console.log("Correct!")
+        console.log("Correct!")
         showQuestion()
     } else {
         mistakes++
         showMistakes()
+        console.log("Inorrect!")
     }
 }
 
