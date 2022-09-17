@@ -1,6 +1,13 @@
 // create variable to hold the state of the game
 let mistakes = 0
 let currentQuestion = 0
+const NEW_GAME  = 1 // ENUM for sounds to play
+const CORRECT   = 2
+const INCORRECT = 3
+
+const audioNewGame   = document.getElementById("new-game-sound")
+const audioCorrect   = document.getElementById("correct-sound")
+const audioIncorrect = document.getElementById("incorrect-sound")
 
 // this section of code adds all answers from the 10 times table to the answers array. This includes repeated values.
 let answers = []
@@ -26,7 +33,7 @@ function showQuestion() {
 
         1. insert the value of answers[currentQuestion] into the HTML element with id="num"
     */
-    //console.log("showQuestion()")
+    playSound(NEW_GAME)
     document.getElementById('num').innerText = answers[currentQuestion]
 }
 
@@ -53,21 +60,20 @@ function checkAnswer(i) {
     */
 
     // Get ID of clicked button
-    let buttonPressed = document.getElementById(i)
-    console.log("ID of button pressed is '" + buttonPressed + "'")
+    let buttonPressed = document.getElementById(i) // Get current pressed button
 
-    let parent = buttonPressed.parentElement
+    let parent = buttonPressed.parentElement // Store the parent element of the button
     
     if ((row * col) == question) {
-        buttonPressed.remove();
-        parent.innerHTML = question
+        playSound(CORRECT)
+        buttonPressed.remove() // Get rid of the current button
+        parent.innerHTML = question // Slot the solution in place of the button
         currentQuestion++
-        console.log("Correct!")
         showQuestion()
     } else {
+        playSound(INCORRECT)
         mistakes++
         showMistakes()
-        console.log("Inorrect!")
     }
 }
 
@@ -89,10 +95,17 @@ function addEventListeners() {
         //console.log("Element " + i + " is a <" + x[i].tagName + ">")
 
         document.getElementById(x[i].id).addEventListener("click", function() {
-           //console.log(i)
            checkAnswer(i+1)
         })
      }
+}
+
+function playSound(ident) {
+    switch (ident) {
+        case NEW_GAME  : audioNewGame.play(); break;
+        case CORRECT   : audioCorrect.play(); break;
+        case INCORRECT : audioIncorrect.play(); break;
+    }
 }
 
 // run addEventListener Function

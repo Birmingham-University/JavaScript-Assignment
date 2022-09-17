@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,36 +9,89 @@
     <link rel="stylesheet" href="style.css">
     <script src="app.js" defer></script>
 </head>
+
 <body>
+    <audio id="new-game-sound">
+        <source src="audio/new_game.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="correct-sound">
+        <source src="audio/correct.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="incorrect-sound">
+        <source src="audio/incorrect.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
     <div id="find-number">
-    <p>Find where number <span id="num"></span> belongs.</p>
+        <p>Find where number <span id="num"></span> belongs.</p>
     </div>
     <div class="game">
         <div class="top-row">
             <div class="square"></div>
-            <div class="square"><p>1</p></div>
-            <div class="square"><p>2</p></div>
-            <div class="square"><p>3</p></div>
-            <div class="square"><p>4</p></div>
-            <div class="square"><p>5</p></div>
-            <div class="square"><p>6</p></div>
-            <div class="square"><p>7</p></div>
-            <div class="square"><p>8</p></div>
-            <div class="square"><p>9</p></div>
-            <div class="square"><p>10</p></div>    
+            <div class="square">
+                <p>1</p>
+            </div>
+            <div class="square">
+                <p>2</p>
+            </div>
+            <div class="square">
+                <p>3</p>
+            </div>
+            <div class="square">
+                <p>4</p>
+            </div>
+            <div class="square">
+                <p>5</p>
+            </div>
+            <div class="square">
+                <p>6</p>
+            </div>
+            <div class="square">
+                <p>7</p>
+            </div>
+            <div class="square">
+                <p>8</p>
+            </div>
+            <div class="square">
+                <p>9</p>
+            </div>
+            <div class="square">
+                <p>10</p>
+            </div>
         </div>
         <div class="bottom-row">
             <div class="side-row">
-                <div class="square"><p>1</p></div>
-                <div class="square"><p>2</p></div>
-                <div class="square"><p>3</p></div>
-                <div class="square"><p>4</p></div>
-                <div class="square"><p>5</p></div>
-                <div class="square"><p>6</p></div>
-                <div class="square"><p>7</p></div>
-                <div class="square"><p>8</p></div>
-                <div class="square"><p>9</p></div>
-                <div class="square"><p>10</p></div>
+                <div class="square">
+                    <p>1</p>
+                </div>
+                <div class="square">
+                    <p>2</p>
+                </div>
+                <div class="square">
+                    <p>3</p>
+                </div>
+                <div class="square">
+                    <p>4</p>
+                </div>
+                <div class="square">
+                    <p>5</p>
+                </div>
+                <div class="square">
+                    <p>6</p>
+                </div>
+                <div class="square">
+                    <p>7</p>
+                </div>
+                <div class="square">
+                    <p>8</p>
+                </div>
+                <div class="square">
+                    <p>9</p>
+                </div>
+                <div class="square">
+                    <p>10</p>
+                </div>
             </div>
             <div class="main">
                 <div class="square" id="div_1"><button id="1">?</button></div>
@@ -143,6 +197,9 @@
             </div>
         </div>
     </div>
-    <div id="mistakes-message"><p>You have made <span id="mistakes">0</span> mistakes.</p></div>
+    <div id="mistakes-message">
+        <p>You have made <span id="mistakes">0</span> mistakes.</p>
+    </div>
 </body>
+
 </html>
