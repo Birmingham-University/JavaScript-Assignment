@@ -18,21 +18,32 @@
     </audio>
     <audio id="correct-sound">
         <source src="audio/correct.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
     </audio>
     <audio id="incorrect-sound">
         <source src="audio/incorrect.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+    </audio>
+    <audio id="music">
+        <source src="audio/music.mp3" type="audio/mpeg">
     </audio>
     <div id="top-container">
         <div id="find-number">
             <p>Find where number <span id="num"></span> belongs.</p>
+        </div>
+        <div id="mistakes-message">
+            <p>You have made <span id="mistakes">0</span> mistakes.</p>
         </div>
         <div id="boy-avatar">
             <img src="images/happy.png" height="100" />
         </div>
     </div>
 </body>
+<div id="instructions">
+    <h2>Learn your multiplication tables</h2>
+    <h3>Instructions</h3>
+    <h3>Find the number displayed number by multiplying the row and column, click the correct button.</h3>
+    <h3>Click anywhere to close!</h3>
+    <div><img id="close" src="images/close.png" width="40" height="40" /></div>
+</div>
 <div class="game">
     <div class="top-row">
         <div class="square"></div>
@@ -204,10 +215,6 @@
         </div>
     </div>
 </div>
-<div id="mistakes-message">
-    <p>You have made <span id="mistakes">0</span> mistakes.</p>
-</div>
-
 </body>
 
 </html>

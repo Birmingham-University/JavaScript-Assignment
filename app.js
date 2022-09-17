@@ -1,13 +1,20 @@
 // create variable to hold the state of the game
 let mistakes = 0
 let currentQuestion = 0
-const NEW_GAME  = 1 // ENUM for sounds to play
+
+// Some enumerations to use in the code
+const NEW_GAME  = 1
 const CORRECT   = 2
 const INCORRECT = 3
 
+const TRUE      = 1
+const FALSE     = 0
+
+// Sounds to play to the user throughout the game
 const audioNewGame   = document.getElementById("new-game-sound")
 const audioCorrect   = document.getElementById("correct-sound")
 const audioIncorrect = document.getElementById("incorrect-sound")
+const audioMusic     = document.getElementById("music")
 
 // this section of code adds all answers from the 10 times table to the answers array. This includes repeated values.
 let answers = []
@@ -33,7 +40,7 @@ function showQuestion() {
 
         1. insert the value of answers[currentQuestion] into the HTML element with id="num"
     */
-    playSound(NEW_GAME)
+    playSound(NEW_GAME) // Play the 'new game' sound
     document.getElementById('num').innerText = answers[currentQuestion]
 }
 
@@ -60,22 +67,22 @@ function checkAnswer(i) {
     */
 
     // Get ID of clicked button
-    let buttonPressed = document.getElementById(i) // Get current pressed button
+    let buttonPressed = document.getElementById(i)  // Get current pressed button
 
-    let parent = buttonPressed.parentElement // Store the parent element of the button
+    let parent = buttonPressed.parentElement        // Store the parent element of the button
     
     if ((row * col) == question) {
-        playSound(CORRECT)
-        buttonPressed.remove() // Get rid of the current button
+        playSound(CORRECT)          // Play the 'correct' sound
+        buttonPressed.remove()      // Get rid of the current button
         parent.innerHTML = question // Slot the solution in place of the button
-        currentQuestion++
-        showBoyAvatar(CORRECT)
-        showQuestion()
+        currentQuestion++           // Add one to question counter
+        showBoyAvatar(CORRECT)      // Display happy boy avatar
+        showQuestion()              // Get the next question
     } else {
-        playSound(INCORRECT)
-        mistakes++
-        showBoyAvatar(INCORRECT)
-        showMistakes()
+        playSound(INCORRECT)        // Play the 'incorrect' sound
+        mistakes++                  // Add 1 to the mistakes counter
+        showBoyAvatar(INCORRECT)    // Display sad boy avatar
+        showMistakes()              // Display the mistakes count to the user
     }
 }
 
@@ -89,19 +96,27 @@ function addEventListeners() {
           etc. 
     */
 
-    // loop through all elements in the DOM in order to get all the buttons within 'main'
+    // Get all instances of <button>
     const x = document.getElementsByTagName("button");
    
+    // Loop through all of our <button> instances to add event listeners.
     for (let i = 0; i < x.length; i++) {
-
-        //console.log("Element " + i + " is a <" + x[i].tagName + ">")
-
         document.getElementById(x[i].id).addEventListener("click", function() {
            checkAnswer(i+1)
         })
      }
+
+     // Add an event to the close button on the instructions screen
+     document.getElementById("close").addEventListener("click", function () {
+        showInstructions(FALSE)
+     })
 }
 
+//////////////////////////////////////////////////////////////////
+// The purpose of this function is to play a sound according t
+// if the user chose a correct answer or not.
+//
+// Arguments: NEW_GAME: (0), CORRECT: (1), INCORRECT: (2)
 function playSound(ident) {
     switch (ident) {
         case NEW_GAME  : audioNewGame.play(); break;
@@ -110,6 +125,12 @@ function playSound(ident) {
     }
 }
 
+//////////////////////////////////////////////////////////////////
+// The purpose of this function is to display a happy avatar
+// with a correct answer and a sad answer with an incorrect
+// answer.
+//
+// Arguments: CORRECT: (1), INCORRECT: (2)
 function showBoyAvatar(status) {
     // status: CORRECT or INCORRECT
     if(status == CORRECT) {
@@ -121,9 +142,43 @@ function showBoyAvatar(status) {
     }
 }
 
+//////////////////////////////////////////////////////////////////
+// The purpose of this function is to display a splash screen
+// at the beginning of the game.
+//
+// Arguments: TRUE (1), FALSE (0)
+function showInstructions(p) {
+    
+    if(p) {
+        // Display instructions
+        document.getElementById("instructions").style.visibility = "visible";
+    } else {
+        // Hide instructions
+        document.getElementById("instructions").style.visibility = "hidden";
+    }
+}
+
+//////////////////////////////////////////////////////////////////
+// The purpose of this function is to play or pause the in-play
+// music
+//
+// Arguments: TRUE (1), FALSE (0)
+function playMusic(p) {
+    if(p) document.getElementById("music").play()
+    else document.getElementById("music").pause()
+}
+
+//////////////////////////////////////////////////////////////////
+// INITIALISATION FUNCTIONS
+
 // run addEventListener Function
 addEventListeners()
 
 // run showQuestion Function
 showQuestion()
+
+// Show instructions
+showInstructions(TRUE)
+
+//////////////////////////////////////////////////////////////////
 
