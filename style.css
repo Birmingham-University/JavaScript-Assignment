@@ -1,9 +1,79 @@
+/* HTML elements */
+p {
+    font-family: "Bungee Spice";
+}
+
+/***********************/
+
+button {
+    background: #fff;
+    backface-visibility: hidden;
+    border-radius: .375rem;
+    border-style: solid;
+    border-width: .125rem;
+    box-sizing: border-box;
+    color: #212121;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Circular, Helvetica, sans-serif;
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    line-height: 1.3;
+    padding: .875rem 1.125rem;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transform: translateZ(0) scale(1);
+    transition: transform .2s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+button:not(:disabled):hover {
+    transform: scale(1.05);
+}
+
+button:not(:disabled):hover:active {
+    transform: scale(1.05) translateY(.125rem);
+}
+
+button:focus {
+    outline: 0 solid transparent;
+}
+
+button:focus:before {
+    content: "";
+    left: calc(-1*.375rem);
+    pointer-events: none;
+    position: absolute;
+    top: calc(-1*.375rem);
+    transition: border-radius;
+    user-select: none;
+}
+
+button:focus:not(:focus-visible) {
+    outline: 0 solid transparent;
+}
+
+button:focus:not(:focus-visible):before {
+    border-width: 0;
+}
+
+button:not(:disabled):active {
+    transform: translateY(.125rem);
+}
+
+/***********************/
+
+/* Class items */
 .game {
-    width: 440px;
-    height: 440px;
+    width: 540px;
+    height: 540px;
     border: 1px solid #000000;
     border-radius: 10px;
-    padding:10px;
+    padding: 10px;
 }
 
 .top-row {
@@ -24,7 +94,7 @@
     */
 
     display: grid;
-    grid-template-columns: 1fr 10fr ;
+    grid-template-columns: 1fr 10fr;
 }
 
 .side-row {
@@ -33,8 +103,7 @@
     1. this should be 40px wide 
     
     */
-    width:40px;
-
+    width: 50px;
 }
 
 .main {
@@ -45,22 +114,22 @@
     
     */
     display: grid;
-    width: 400px;
-    grid-template-columns: auto auto auto auto auto auto auto auto auto auto ;
+    width: 500px;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
 }
 
 .square {
     margin: 0px;
-    height: 40px;
+    height: 50px;
     width: 40px;
     background-color: white;
     display: grid;
     justify-content: center;
     align-content: center;
-    
+
 }
 
-.square > p {
+.square>p {
     color: black;
 }
 
@@ -68,24 +137,39 @@
     visibility: hidden
 }
 
+
+.mistakes {
+    font-weight: bold;
+}
+
+#top-container {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    width:540px;
+}
+
+/* ID Items */
 #find-number {
-    width:400px;
+    width: 200px;
     border: 1px sold darkgreen;
-    background-color:lightgreen;
-    padding:10px;
+    background-color: lightgreen;
+    padding: 10px;
     border-radius: 5px;
-    margin:10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #mistakes-message {
-    width:400px;
+    width: 200px;
     border: 1px sold darkred;
-    background-color:pink;
-    padding:10px;
+    background-color: pink;
+    padding: 10px;
     border-radius: 5px;
-    margin:10px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#mistakes {
-    font-weight: bold;
-}

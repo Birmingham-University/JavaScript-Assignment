@@ -69,10 +69,12 @@ function checkAnswer(i) {
         buttonPressed.remove() // Get rid of the current button
         parent.innerHTML = question // Slot the solution in place of the button
         currentQuestion++
+        showBoyAvatar(CORRECT)
         showQuestion()
     } else {
         playSound(INCORRECT)
         mistakes++
+        showBoyAvatar(INCORRECT)
         showMistakes()
     }
 }
@@ -105,6 +107,17 @@ function playSound(ident) {
         case NEW_GAME  : audioNewGame.play(); break;
         case CORRECT   : audioCorrect.play(); break;
         case INCORRECT : audioIncorrect.play(); break;
+    }
+}
+
+function showBoyAvatar(status) {
+    // status: CORRECT or INCORRECT
+    if(status == CORRECT) {
+        // Show the 'happy' boy avatar
+        document.getElementById("boy-avatar").innerHTML = "<img src='images/happy.png' height='100' />"
+    } else {
+        // Show the 'sad' boy avatar
+        document.getElementById("boy-avatar").innerHTML = "<img src='images/sad.png' height='100' />"
     }
 }
 
