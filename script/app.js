@@ -9,12 +9,16 @@ const CORRECT       = 2
 const INCORRECT     = 3
 const SKIPPED       = 4
 
+// Useful constants
 const TRUE          = 1
 const FALSE         = 0
 
+// Is the sound set as on or off?
 let soundFlag       = TRUE
 
-let alreadyPlayed = [] // a place to keep all played numbers
+// Player details for the JSON xAPI object
+let playerName      = ""
+let playerEmail     = ""
 
 // Sounds to play to the user throughout the game
 const audioNewGame   = document.getElementById("new-game-sound")
@@ -121,7 +125,6 @@ function addEventListeners() {
      document.getElementById("skip-question").addEventListener("click", function () {
         console.log("EventListener for skipQuestion()")
         skipQuestion()
-        
      })
 }
 
@@ -176,7 +179,10 @@ function showInstructions(p) {
         // Display instructions
         document.getElementById("instructions").style.visibility = "visible";
     } else {
-        // Hide instructions
+        // Grab player name and email then hide the instructions
+        playerName = document.getElementById("player-name").value
+        playerEmail = document.getElementById("player-email").value
+        
         document.getElementById("instructions").style.visibility = "hidden";
     }
 }
@@ -208,12 +214,62 @@ function skipQuestion() {
     if (currentQuestion >= 100) {
         alert("GAME FINISHED")
         return
+    } else {
+        // NEED A LINE TO REVEAL THE ANSWER
+        showBoyAvatar(SKIPPED)    // Display confused boy avatar
+        skipped++
+        sendStatement("skipped", "http://id.tincanapi.com/verb/skipped", "Question "+currentQuestion, "http://www.tyrone.bishop/times-table");
+        showSkipped()
+        showQuestion()
     }
-    // NEED A LINE TO REVEAL THE ANSWER
-    showBoyAvatar(SKIPPED)    // Display confused boy avatar
-    skipped++
-    showSkipped()
-    showQuestion()
+}
+
+//////////////////////////////////////////////////////////////////
+// The purpose of this function is to send a JSON xAPI statment
+// to the LRS (https://watershedlrs.com/)
+//
+// this xAPI routine uses the xAPI Wrapper available here:
+// https://github.com/adlnet/xAPIWrapper/releases
+//
+// Arguments:
+//
+// verb: chosen from https://registry.tincanapi.com/#home/verbs
+// verbID: associated ID from https://registry.tincanapi.com/#home/verbs
+// object: What the user is doing
+// objectID: My own object ID URI
+//
+//////////////////////////////////////////////////////////////////
+function sendStatement(verb, verbID, object, objectID) {
+
+    const conf = {
+        "endpoint": "https://watershedlrs.com/api/organizations/20013/lrs/", // Watershed's endpoint URI
+        "auth": "Basic " + toBase64("49169e3244e6da:6dec7cd3853775")         // key and secret
+    }
+
+    ADL.XAPIWrapper.changeConfig(conf); 
+
+    try { // in case there is an error
+        const statement = {
+            "actor": {
+                "name": playerName,
+                "mbox": "mailto:" + playerEmail
+            },
+            "verb": {
+                "id": verbID,
+                "display": { "en-gb": verb }
+            },
+            "object": {
+                "id": objectID,
+                "definition": {
+                    "name": { "en-gb": object }
+                }
+            }
+        }
+        const result = ADL.XAPIWrapper.sendStatement(statement);
+    }
+    catch(e) {
+        console.log("Unable to send xAPI statement, returned error: " + e)
+    }
 }
 
 //////////////////////////////////////////////////////////////////
