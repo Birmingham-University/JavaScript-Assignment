@@ -1,14 +1,19 @@
 // create variable to hold the state of the game
-let mistakes = 0
+let mistakes        = 0
 let currentQuestion = 0
+let skipped         = 0
 
 // Some enumerations to use in the code
-const NEW_GAME  = 1
-const CORRECT   = 2
-const INCORRECT = 3
+const NEW_GAME      = 1
+const CORRECT       = 2
+const INCORRECT     = 3
 
-const TRUE      = 1
-const FALSE     = 0
+const TRUE          = 1
+const FALSE         = 0
+
+let soundFlag       = FALSE
+
+let alreadyPlayed = [] // a place to keep all played numbers
 
 // Sounds to play to the user throughout the game
 const audioNewGame   = document.getElementById("new-game-sound")
@@ -28,18 +33,10 @@ for (let i = 1; i <= 10; i++) {
 answers = answers.sort(() => Math.random() - 0.5)
 
 function showMistakes() {
-    /* ADD CODE HERE
-
-        1. insert the value of mistakes into the HTML element with id="mistakes"
-    */
     document.getElementById("mistakes").innerText = mistakes
 }
 
 function showQuestion() {
-    /* ADD CODE HERE
-
-        1. insert the value of answers[currentQuestion] into the HTML element with id="num"
-    */
     playSound(NEW_GAME) // Play the 'new game' sound
     document.getElementById('num').innerText = answers[currentQuestion]
 }
@@ -53,18 +50,6 @@ function checkAnswer(i) {
     let col = (Math.floor(I / 10)) + 1
 
     let question = answers[currentQuestion]
-
-    /* ADD CODE HERE
-    
-        1. check if row*col == answers[currentQuestion]
-            if true:
-                1. remove the button and replace with the number
-                2. add one to the currentQuestion counter
-                3. call the showQuestion function
-            if false:
-                1. add one to mistakes
-                2. call the showMistakes function
-    */
 
     // Get ID of clicked button
     let buttonPressed = document.getElementById(i)  // Get current pressed button
@@ -87,19 +72,11 @@ function checkAnswer(i) {
 }
 
 function addEventListeners() {
-    /* ADD CODE HERE
-
-       1. add event listeners for all the grid buttons so they call the grade function.
-          E.g.
-          button id="1" should call grade(1)
-          button id="2" should call grade(2)
-          etc. 
-    */
 
     // Get all instances of <button>
     const x = document.getElementsByTagName("button");
    
-    // Loop through all of our <button> instances to add event listeners.
+    // Loop through all of our <button> instances to add event listeners
     for (let i = 0; i < x.length; i++) {
         document.getElementById(x[i].id).addEventListener("click", function() {
            checkAnswer(i+1)
@@ -109,6 +86,17 @@ function addEventListeners() {
      // Add an event to the close button on the instructions screen
      document.getElementById("close").addEventListener("click", function () {
         showInstructions(FALSE)
+        playMusic(TRUE)
+     })
+
+     // Add an event listener to the audio mute button
+     document.getElementById("toggle-music").addEventListener("click", function () {
+        // Toggle the music
+        if(!soundFlag) {
+            playMusic(TRUE)
+        } else {
+            playMusic(FALSE)
+        }
      })
 }
 
@@ -117,7 +105,11 @@ function addEventListeners() {
 // if the user chose a correct answer or not.
 //
 // Arguments: NEW_GAME: (0), CORRECT: (1), INCORRECT: (2)
+//////////////////////////////////////////////////////////////////
 function playSound(ident) {
+    
+    if(!soundFlag) return;
+
     switch (ident) {
         case NEW_GAME  : audioNewGame.play(); break;
         case CORRECT   : audioCorrect.play(); break;
@@ -131,6 +123,7 @@ function playSound(ident) {
 // answer.
 //
 // Arguments: CORRECT: (1), INCORRECT: (2)
+//////////////////////////////////////////////////////////////////
 function showBoyAvatar(status) {
     // status: CORRECT or INCORRECT
     if(status == CORRECT) {
@@ -147,6 +140,7 @@ function showBoyAvatar(status) {
 // at the beginning of the game.
 //
 // Arguments: TRUE (1), FALSE (0)
+//////////////////////////////////////////////////////////////////
 function showInstructions(p) {
     
     if(p) {
@@ -159,13 +153,29 @@ function showInstructions(p) {
 }
 
 //////////////////////////////////////////////////////////////////
+// The purpose of this function is to allow the player to skip a
+// question. This will reveal the corect answer.
+//////////////////////////////////////////////////////////////////
+function playMusic(p) {
+
+    if(p) {
+        document.getElementById("music").play()
+        document.getElementById("toggle-music").setAttribute("src", "images/music_on.png")
+        soundFlag = TRUE
+    } else {
+        document.getElementById("music").pause()
+        document.getElementById("toggle-music").setAttribute("src", "images/music_off.png")
+        soundFlag = FALSE
+    }
+}
+
+//////////////////////////////////////////////////////////////////
 // The purpose of this function is to play or pause the in-play
 // music
 //
 // Arguments: TRUE (1), FALSE (0)
-function playMusic(p) {
-    if(p) document.getElementById("music").play()
-    else document.getElementById("music").pause()
+function skipQuestion() {
+ // TO DO
 }
 
 //////////////////////////////////////////////////////////////////

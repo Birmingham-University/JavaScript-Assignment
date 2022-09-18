@@ -30,20 +30,21 @@
             <p>Find where number <span id="num"></span> belongs.</p>
         </div>
         <div id="mistakes-message">
-            <p>You have made <span id="mistakes">0</span> mistakes.</p>
+            <p>Mistakes: <span id="mistakes">0</span></p>
+            <p>Skipped: <span id="skipped">0</span></p>
         </div>
         <div id="boy-avatar">
             <img src="images/happy.png" height="100" />
         </div>
     </div>
 </body>
-<div id="instructions">
+<span id="instructions">
     <h2>Learn your multiplication tables</h2>
     <h3>Instructions</h3>
     <h3>Find the number displayed number by multiplying the row and column, click the correct button.</h3>
     <h3>Click anywhere to close!</h3>
     <div><img id="close" src="images/close.png" width="40" height="40" /></div>
-</div>
+</span>
 <div class="game">
     <div class="top-row">
         <div class="square"></div>
@@ -214,6 +215,9 @@
             <div class="square" id="div_100"><button id="100">?</button></div>
         </div>
     </div>
+</div>
+<div id="controls">
+    <div><img src="images/music_on.png" width="30" height="30" id="toggle-music"/></div>
 </div>
 </body>
 
