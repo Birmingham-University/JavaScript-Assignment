@@ -152,12 +152,12 @@ button:not(:disabled):active {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     width:540px;
-    margin: auto;
+    margin-left:50px;
 }
 
 /* ID Items */
 #find-number {
-    width: 200px;
+    width: 160px;
     border: 1px sold darkgreen;
     background-color: lightgreen;
     padding: 10px;
@@ -169,7 +169,7 @@ button:not(:disabled):active {
 }
 
 #mistakes-message {
-    width: 200px;
+    width: 160px;
     border: 1px sold darkred;
     background-color: pink;
     padding: 10px;
@@ -182,8 +182,8 @@ button:not(:disabled):active {
 }
 
 #instructions{
-    width:500px;
-    height:300px;
+    width:800px;
+    height:600px;
     background-color: lightblue;
     visibility:hidden;
     position:absolute;
@@ -204,8 +204,13 @@ button:not(:disabled):active {
 }
 
 #controls {
-    margin: auto;
+    margin-left: 65px;
     width:540px;
+
+}
+
+#boy-avatar {
+    margin-left:5px;
 }
 
 .control_button {

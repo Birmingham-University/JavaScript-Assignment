@@ -25,6 +25,20 @@
     <audio id="music">
         <source src="audio/music.mp3" type="audio/mpeg">
     </audio>
+    
+
+<span id="instructions">
+    <h2>Learn your multiplication tables</h2>
+    <h3>Instructions</h3>
+    <h3>Find the number displayed number by multiplying the row and column, click the correct button.</h3>
+    <h4>Use this button <span><img src="images/turn_sound_off_inactive.png" width="100px" /></span>to turn the sound on and off.</h4>
+    <h4>Use this button <span><img src="images/skip_question_inactive.png" width="100px" /></span>to move to the next question without answering.</h4>
+    <h4>Use this button <span><img src="images/instructions_inactive.png" width="100px" /></span>to turn the sound on and off.</h4>
+    <h4>When you are ready, click the 'PLAY GAME' button below...</h4>
+    <hr />
+    <div><img id="close" src="images/play_game.png" width="150" /></div>
+</span>
+<div class="game">
     <div id="top-container">
         <div id="find-number">
             <p>Find where number <span id="num"></span> belongs.</p>
@@ -37,15 +51,6 @@
             <img src="images/happy.png" height="100" />
         </div>
     </div>
-</body>
-<span id="instructions">
-    <h2>Learn your multiplication tables</h2>
-    <h3>Instructions</h3>
-    <h3>Find the number displayed number by multiplying the row and column, click the correct button.</h3>
-    <h3>Click anywhere to close!</h3>
-    <div><img id="close" src="images/close.png" width="40" height="40" /></div>
-</span>
-<div class="game">
     <div class="top-row">
         <div class="square"></div>
         <div class="square">
@@ -215,12 +220,16 @@
             <div class="square" id="div_100"><button id="100">?</button></div>
         </div>
     </div>
+    <div id="controls">
+        <span><img class="control_button button-turn-sound-off" src="images/turn_sound_off_inactive.png" width="150"
+                id="toggle-music" /></span>
+        <span><img class="control_button button-skip-question" src="images/skip_question_inactive.png" width="150"
+                id="skip-question" /></span>
+        <span><img class="control_button button-instructions" src="images/instructions_inactive.png" width="150"
+                id="help" /></span>
+    </div>
 </div>
-<div id="controls">
-    <span><img class="control_button button-turn-sound-off" src="images/turn_sound_off_inactive.png" width="150" id="toggle-music"/></span>
-    <span><img class="control_button button-skip-question" src="images/skip_question_inactive.png" width="150" id="skip-question"/></span>
-    <span><img class="control_button button-instructions" src="images/instructions_inactive.png" width="150" id="help"/></span>
-</div>
+
 </body>
 
 </html>

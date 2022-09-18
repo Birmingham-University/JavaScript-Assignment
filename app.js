@@ -7,6 +7,7 @@ let skipped         = 0
 const NEW_GAME      = 1
 const CORRECT       = 2
 const INCORRECT     = 3
+const SKIPPED       = 4
 
 const TRUE          = 1
 const FALSE         = 0
@@ -47,6 +48,11 @@ function showQuestion() {
 }
 
 function checkAnswer(i) {
+    // Has the game finished?
+    if (currentQuestion >= 100) {
+        alert("GAME FINISHED")
+        return
+    }
 
     // these three lines use the id of the button, i, to work out 
     // which row and column the button was
@@ -61,6 +67,8 @@ function checkAnswer(i) {
 
     let parent = buttonPressed.parentElement        // Store the parent element of the button
     
+    
+
     if ((row * col) == question) {
         playSound(CORRECT)          // Play the 'correct' sound
         buttonPressed.remove()      // Get rid of the current button
@@ -139,18 +147,22 @@ function playSound(ident) {
 // with a correct answer and a sad answer with an incorrect
 // answer.
 //
-// Arguments: CORRECT: (1), INCORRECT: (2)
+// Arguments: CORRECT: (1), INCORRECT: (2), SKIPPED (3)
 //////////////////////////////////////////////////////////////////
 function showBoyAvatar(status) {
-    // status: CORRECT or INCORRECT
-    if(status == CORRECT) {
-        // Show the 'happy' boy avatar
-        document.getElementById("boy-avatar").innerHTML = "<img src='images/happy.png' height='100' />"
-    } else {
-        // Show the 'sad' boy avatar
-        document.getElementById("boy-avatar").innerHTML = "<img src='images/sad.png' height='100' />"
+    
+    switch (status){
+        case CORRECT : document.getElementById("boy-avatar").innerHTML = "<img src='images/happy.png' height='100' />"
+            break;
+        case INCORRECT : document.getElementById("boy-avatar").innerHTML = "<img src='images/sad.png' height='100' />"
+            break;
+        case SKIPPED : document.getElementById("boy-avatar").innerHTML = "<img src='images/confused.png' height='100' />"
+            break;
     }
 }
+//////////////////////////////////////////////////////////////////
+
+
 
 //////////////////////////////////////////////////////////////////
 // The purpose of this function is to display a splash screen
@@ -192,8 +204,13 @@ function playMusic(p) {
 //
 //////////////////////////////////////////////////////////////////
 function skipQuestion() {
-    console.log("skipQuestion()")
+    // Has the game finished?
+    if (currentQuestion >= 100) {
+        alert("GAME FINISHED")
+        return
+    }
     // NEED A LINE TO REVEAL THE ANSWER
+    showBoyAvatar(SKIPPED)    // Display confused boy avatar
     skipped++
     showSkipped()
     showQuestion()
