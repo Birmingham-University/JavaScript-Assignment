@@ -11,7 +11,7 @@ const INCORRECT     = 3
 const TRUE          = 1
 const FALSE         = 0
 
-let soundFlag       = FALSE
+let soundFlag       = TRUE
 
 let alreadyPlayed = [] // a place to keep all played numbers
 
@@ -34,6 +34,11 @@ answers = answers.sort(() => Math.random() - 0.5)
 
 function showMistakes() {
     document.getElementById("mistakes").innerText = mistakes
+}
+
+function showSkipped() {
+    document.getElementById("skipped").innerText = skipped
+    currentQuestion++ // Add to the current question so we can move on
 }
 
 function showQuestion() {
@@ -86,7 +91,12 @@ function addEventListeners() {
      // Add an event to the close button on the instructions screen
      document.getElementById("close").addEventListener("click", function () {
         showInstructions(FALSE)
-        playMusic(TRUE)
+        if(soundFlag) playMusic(TRUE)
+     })
+
+     // Add an event to the show the instructions screen
+     document.getElementById("help").addEventListener("click", function () {
+        showInstructions(TRUE)
      })
 
      // Add an event listener to the audio mute button
@@ -97,6 +107,13 @@ function addEventListeners() {
         } else {
             playMusic(FALSE)
         }
+     })
+
+     // Add an event listener to skip the current question
+     document.getElementById("skip-question").addEventListener("click", function () {
+        console.log("EventListener for skipQuestion()")
+        skipQuestion()
+        
      })
 }
 
@@ -160,22 +177,26 @@ function playMusic(p) {
 
     if(p) {
         document.getElementById("music").play()
-        document.getElementById("toggle-music").setAttribute("src", "images/music_on.png")
+        document.getElementById("toggle-music").setAttribute("src", "images/turn_sound_off_inactive.png")
         soundFlag = TRUE
     } else {
         document.getElementById("music").pause()
-        document.getElementById("toggle-music").setAttribute("src", "images/music_off.png")
+        document.getElementById("toggle-music").setAttribute("src", "images/turn_sound_on_inactive.png")
         soundFlag = FALSE
     }
 }
 
 //////////////////////////////////////////////////////////////////
-// The purpose of this function is to play or pause the in-play
-// music
+// The purpose of this function is to enable the user to skip
+// the current question
 //
-// Arguments: TRUE (1), FALSE (0)
+//////////////////////////////////////////////////////////////////
 function skipQuestion() {
- // TO DO
+    console.log("skipQuestion()")
+    // NEED A LINE TO REVEAL THE ANSWER
+    skipped++
+    showSkipped()
+    showQuestion()
 }
 
 //////////////////////////////////////////////////////////////////

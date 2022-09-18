@@ -1,4 +1,9 @@
 /* HTML elements */
+
+body {
+    background-image: url("images/background.jpg");
+  }
+
 p {
     font-family: "Bungee Spice";
 }
@@ -71,7 +76,7 @@ button:not(:disabled):active {
 .game {
     width: 540px;
     height: 540px;
-    border: 1px solid #000000;
+    /*border: 1px solid #000000;*/
     border-radius: 10px;
     padding: 10px;
     margin: auto;
@@ -123,7 +128,7 @@ button:not(:disabled):active {
     margin: 0px;
     height: 50px;
     width: 40px;
-    background-color: white;
+    /* background-color: white; */
     display: grid;
     justify-content: center;
     align-content: center;
@@ -201,4 +206,20 @@ button:not(:disabled):active {
 #controls {
     margin: auto;
     width:540px;
+}
+
+.control_button {
+    cursor: pointer;
+}
+
+.button-turn-sound-off:hover {
+    
+}
+
+.button-skip-question:hover {
+    
+}
+
+.button-instrucions:hover {
+    
 }
