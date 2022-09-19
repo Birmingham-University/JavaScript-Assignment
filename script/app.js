@@ -1,9 +1,12 @@
+//////////////////////////////////////////////////////////////////
+// GLOBAL VARIABLES AND CONSTANTS
+
 // create variable to hold the state of the game
 let mistakes        = 0
 let currentQuestion = 0
 let skipped         = 0
 
-// Some enumerations to use in the code
+// Some useful constants to use in the code
 const NEW_GAME      = 1
 const CORRECT       = 2
 const INCORRECT     = 3
@@ -25,6 +28,8 @@ const audioNewGame   = document.getElementById("new-game-sound")
 const audioCorrect   = document.getElementById("correct-sound")
 const audioIncorrect = document.getElementById("incorrect-sound")
 const audioMusic     = document.getElementById("music")
+
+//////////////////////////////////////////////////////////////////
 
 // this section of code adds all answers from the 10 times table to the answers array. This includes repeated values.
 let answers = []
@@ -102,8 +107,28 @@ function addEventListeners() {
 
      // Add an event to the close button on the instructions screen
      document.getElementById("close").addEventListener("click", function () {
-        showInstructions(FALSE)
-        if(soundFlag) playMusic(TRUE)
+        
+        // Has the user provided their name and email?
+        
+        // Check player name is not empty
+        if(!document.getElementById("player-name").value) {
+            document.getElementById("player-name").style.backgroundColor = "#CC0000"
+            return
+        }
+
+        // Chekc player email is not empty
+        if(!document.getElementById("player-email").value) {
+            document.getElementById("player-email").style.backgroundColor = "#CC0000"
+            return
+        }
+
+        // If they are both provided then go ahead and close the dialog
+        if(document.getElementById("player-name").value && document.getElementById("player-email").value) {
+            document.getElementById("player-name").style.backgroundColor = "#faebd7"
+            document.getElementById("player-email").style.backgroundColor = "#faebd7"
+            showInstructions(FALSE)
+            if(soundFlag) playMusic(TRUE)
+        }
      })
 
      // Add an event to the show the instructions screen

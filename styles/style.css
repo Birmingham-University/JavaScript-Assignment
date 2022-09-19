@@ -1,12 +1,19 @@
 /* HTML elements */
 
 body {
-    background-image: url("images/background.jpg");
+    background-image: url("../images/background.jpg");
   }
 
-h1, h2, h3, h4 {
+h1 {
+    font-size:50px;
     font-family: "Amatic SC";
 }
+
+h2, h3, h4 {
+    font-family: "Amatic SC";
+}
+
+
 
 p {
     font-family: "Bungee Spice";
@@ -38,6 +45,11 @@ button {
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+}
+
+label {
+    font-size: 20px;
+    font-family: Amatic SC;
 }
 
 button:not(:disabled):hover {
@@ -159,6 +171,14 @@ button:not(:disabled):active {
     margin-left:50px;
 }
 
+.text-box {
+    background-color: #faebd7;
+    height:50px;
+    width:500px;
+    font-family: Amatic SC;
+    font-size:40px;
+}
+
 /* ID Items */
 #find-number {
     width: 160px;
@@ -190,8 +210,12 @@ button:not(:disabled):active {
     height:600px;
     background-color: lightblue;
     visibility:hidden;
-    position:absolute;
+    position:fixed;
     margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     z-index: 1;
     border: 2px, solid black;
     padding:15px;
