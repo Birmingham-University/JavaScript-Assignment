@@ -51,9 +51,10 @@ function showSkipped() {
     currentQuestion++ // Add to the current question so we can move on
 }
 
-function showQuestion() {
-    playSound(NEW_GAME) // Play the 'new game' sound
-    document.getElementById('num').innerText = answers[currentQuestion]
+function showQuestion() { 
+
+        playSound(NEW_GAME) // Play the 'new game' sound
+        document.getElementById('num').innerText = answers[currentQuestion]
 }
 
 function checkAnswer(i) {
@@ -76,8 +77,6 @@ function checkAnswer(i) {
 
     let parent = buttonPressed.parentElement        // Store the parent element of the button
     
-    
-
     if ((row * col) == question) {
         playSound(CORRECT)          // Play the 'correct' sound
         buttonPressed.remove()      // Get rid of the current button
@@ -112,20 +111,24 @@ function addEventListeners() {
         
         // Check player name is not empty
         if(!document.getElementById("player-name").value) {
-            document.getElementById("player-name").style.backgroundColor = "#CC0000"
+            document.getElementById("player-name").style.backgroundColor = "#CC0000"  // Change bgcolor of text box to red
+            document.getElementsByClassName("warning")[0].style.visibility = "visible"; // Show the warning to the user
             return
         }
 
-        // Chekc player email is not empty
+        // Check player email is not empty
         if(!document.getElementById("player-email").value) {
-            document.getElementById("player-email").style.backgroundColor = "#CC0000"
+            document.getElementById("player-email").style.backgroundColor = "#CC0000" // Change bgcolor of text box to red
+            document.getElementsByClassName("warning")[1].style.visibility = "visible"; // Show the warning to the user
             return
         }
 
-        // If they are both provided then go ahead and close the dialog
+        // If they are both provided then go ahead and reset the colours and close the dialog
         if(document.getElementById("player-name").value && document.getElementById("player-email").value) {
             document.getElementById("player-name").style.backgroundColor = "#faebd7"
             document.getElementById("player-email").style.backgroundColor = "#faebd7"
+            document.getElementsByClassName("warning")[0].style.visibility = "hidden";
+            document.getElementsByClassName("warning")[1].style.visibility = "hidden";
             showInstructions(FALSE)
             if(soundFlag) playMusic(TRUE)
         }
@@ -275,7 +278,7 @@ function sendStatement(verb, verbID, object, objectID) {
 
     try { // in case there is an error
         const statement = {
-            "actor": {
+            "actor": { // We are using the name/email combination to identify the learner
                 "name": playerName,
                 "mbox": "mailto:" + playerEmail
             },
@@ -310,4 +313,3 @@ showQuestion()
 showInstructions(TRUE)
 
 //////////////////////////////////////////////////////////////////
-

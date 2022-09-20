@@ -209,6 +209,7 @@ button:not(:disabled):active {
     width:800px;
     height:600px;
     background-color: lightblue;
+    background-image: url("../images/sky.jpg");
     visibility:hidden;
     position:fixed;
     margin: auto;
@@ -255,4 +256,10 @@ button:not(:disabled):active {
 
 .button-instrucions:hover {
     
+}
+
+.warning {
+    color:red;
+    font-weight: bold;
+    visibility:hidden;
 }
