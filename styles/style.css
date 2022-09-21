@@ -245,6 +245,10 @@ button:not(:disabled):active {
     cursor: pointer;
 }
 
+#play-again {
+    cursor: pointer;
+}
+
 #toggle-music {
     cursor: pointer;
 }

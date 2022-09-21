@@ -1,5 +1,6 @@
 //////////////////////////////////////////////////////////////////
 // GLOBAL VARIABLES AND CONSTANTS
+//////////////////////////////////////////////////////////////////
 
 // create variable to hold the state of the game
 let mistakes        = 0
@@ -11,7 +12,7 @@ const NEW_GAME      = 1
 const CORRECT       = 2
 const INCORRECT     = 3
 const SKIPPED       = 4
-const MAX_PLAYS     = 3
+const MAX_PLAYS     = 100 // This is for a full game at the moment
 
 // Useful constants
 const TRUE          = 1
@@ -31,8 +32,9 @@ const audioIncorrect = document.getElementById("incorrect-sound")
 const audioMusic     = document.getElementById("music")
 
 //////////////////////////////////////////////////////////////////
-
-// this section of code adds all answers from the 10 times table to the answers array. This includes repeated values.
+// this section of code adds all answers from the 10 times table
+// to the answers array. This includes repeated values.
+//////////////////////////////////////////////////////////////////
 let answers = []
 for (let i = 1; i <= 10; i++) {
     for (let j = 1; j <= 10; j++) {
@@ -43,21 +45,37 @@ for (let i = 1; i <= 10; i++) {
 // this code randomises the order of the answers array
 answers = answers.sort(() => Math.random() - 0.5)
 
+//////////////////////////////////////////////////////////////////
+// This function displays the number of incorrectly answered
+// questions in the top left of the screen.
+//////////////////////////////////////////////////////////////////
 function showMistakes() {
     document.getElementById("mistakes").innerText = mistakes
 }
 
+//////////////////////////////////////////////////////////////////
+// This function displays the number of skipped questions in the
+// top left of the screen.
+//////////////////////////////////////////////////////////////////
 function showSkipped() {
     document.getElementById("skipped").innerText = skipped
     currentQuestion++ // Add to the current question so we can move on
 }
 
+//////////////////////////////////////////////////////////////////
+// This function displays the new question in the top left of the
+// screen.
+//////////////////////////////////////////////////////////////////
 function showQuestion() { 
 
     playSound(NEW_GAME) // Play the 'new game' sound
     document.getElementById('num').innerText = answers[currentQuestion]
 }
 
+//////////////////////////////////////////////////////////////////
+// This function checks if the correct button is pressed and
+// sets all variables to report to the user
+//////////////////////////////////////////////////////////////////
 function checkAnswer(i) {
     // Has the game finished?
     if (currentQuestion >= 100) {
@@ -96,6 +114,10 @@ function checkAnswer(i) {
     }
 }
 
+//////////////////////////////////////////////////////////////////
+// This function add event listeners to all objects on the screen
+// which the user can interact with.
+//////////////////////////////////////////////////////////////////
 function addEventListeners() {
 
     // Get all instances of <button>
@@ -120,8 +142,8 @@ function addEventListeners() {
             return
         }
 
-        // Check player email is not empty
-        if(!document.getElementById("player-email").value) {
+        // Check player email is not empty and, if entred, is valid!
+        if((!document.getElementById("player-email").value) || !isEmailValid(document.getElementById("player-email").value)) {
             document.getElementById("player-email").style.backgroundColor = "#CC0000" // Change bgcolor of text box to red
             document.getElementsByClassName("warning")[1].style.visibility = "visible" // Show the warning to the user
             return
@@ -206,9 +228,6 @@ function showBoyAvatar(status) {
             break;
     }
 }
-//////////////////////////////////////////////////////////////////
-
-
 
 //////////////////////////////////////////////////////////////////
 // The purpose of this function is to display a splash screen
@@ -279,7 +298,6 @@ function skipQuestion() {
 // verbID: associated ID from https://registry.tincanapi.com/#home/verbs
 // object: What the user is doing
 // objectID: My own object ID URI
-//
 //////////////////////////////////////////////////////////////////
 function sendStatement(verb, verbID, object, objectID) {
 
@@ -314,23 +332,43 @@ function sendStatement(verb, verbID, object, objectID) {
     }
 }
 
+//////////////////////////////////////////////////////////////////
+// Encrypt a string (username and email for example).
+//
+// Arguments: unencryopted string
+// Returns:   the encrypted string
+//////////////////////////////////////////////////////////////////
 function encrypt(unencrypted_str) {
     return window.btoa(unencrypted_str)
 }
 
+//////////////////////////////////////////////////////////////////
+// Decrypt a string (username and email for example).
+//
+// Arguments: encrypted string
+// Returns:   the dencrypted string
+//////////////////////////////////////////////////////////////////
 function decrypt(encrypted_str) {
     return window.atob(encrypted_str)
 }
 
+//////////////////////////////////////////////////////////////////
+// Start the game from the beginning if the user requestes a
+// new game.
+//////////////////////////////////////////////////////////////////
 function resetGame() {
     mistakes        = 0
     currentQuestion = 0
     skipped         = 0
 }
 
+//////////////////////////////////////////////////////////////////
+// Show the scoreboard at the end of MAX_PLAYS
+//////////////////////////////////////////////////////////////////
 function showScoreboard(status) {
     
     // Populate the game data
+    document.getElementById("scoreboard-name").innerHTML         = playerName // Get the player's name
     document.getElementById("reported-total-correct").innerHTML  = (currentQuestion - mistakes - skipped) // Gives correct answers
     document.getElementById("reported-total-mistakes").innerHTML = mistakes
     document.getElementById("reported-total-skipped").innerHTML  = skipped
@@ -344,6 +382,17 @@ function showScoreboard(status) {
     }
 }
 
+//////////////////////////////////////////////////////////////////
+// Check if email is valid on input
+//
+// Argument: email:string
+// Returns:  1 (TRUE) or 0 (FALSE)
+//////////////////////////////////////////////////////////////////
+function isEmailValid (email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+}
+
+//////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
 // INITIALISATION FUNCTIONS
 
