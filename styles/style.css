@@ -208,7 +208,24 @@ button:not(:disabled):active {
 #instructions{
     width:800px;
     height:600px;
-    background-color: lightblue;
+    background-image: url("../images/sky.jpg");
+    visibility:visible;
+    position:fixed;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    border: 2px, solid black;
+    padding:15px;
+    border-radius:15px;
+    box-shadow:6px 6px 4px grey;
+}
+
+#scoreboard {
+    width:600px;
+    height:450px;
     background-image: url("../images/sky.jpg");
     visibility:hidden;
     position:fixed;

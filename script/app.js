@@ -11,6 +11,7 @@ const NEW_GAME      = 1
 const CORRECT       = 2
 const INCORRECT     = 3
 const SKIPPED       = 4
+const MAX_PLAYS     = 3
 
 // Useful constants
 const TRUE          = 1
@@ -53,8 +54,8 @@ function showSkipped() {
 
 function showQuestion() { 
 
-        playSound(NEW_GAME) // Play the 'new game' sound
-        document.getElementById('num').innerText = answers[currentQuestion]
+    playSound(NEW_GAME) // Play the 'new game' sound
+    document.getElementById('num').innerText = answers[currentQuestion]
 }
 
 function checkAnswer(i) {
@@ -84,11 +85,14 @@ function checkAnswer(i) {
         currentQuestion++           // Add one to question counter
         showBoyAvatar(CORRECT)      // Display happy boy avatar
         showQuestion()              // Get the next question
+        if(currentQuestion > MAX_PLAYS) showScoreboard(TRUE) // Is this the end of the game?
     } else {
         playSound(INCORRECT)        // Play the 'incorrect' sound
         mistakes++                  // Add 1 to the mistakes counter
+        currentQuestion++           // Add one to question counter
         showBoyAvatar(INCORRECT)    // Display sad boy avatar
         showMistakes()              // Display the mistakes count to the user
+        if(currentQuestion > MAX_PLAYS) showScoreboard(TRUE) // Is this the end of the game?
     }
 }
 
@@ -112,14 +116,14 @@ function addEventListeners() {
         // Check player name is not empty
         if(!document.getElementById("player-name").value) {
             document.getElementById("player-name").style.backgroundColor = "#CC0000"  // Change bgcolor of text box to red
-            document.getElementsByClassName("warning")[0].style.visibility = "visible"; // Show the warning to the user
+            document.getElementsByClassName("warning")[0].style.visibility = "visible" // Show the warning to the user
             return
         }
 
         // Check player email is not empty
         if(!document.getElementById("player-email").value) {
             document.getElementById("player-email").style.backgroundColor = "#CC0000" // Change bgcolor of text box to red
-            document.getElementsByClassName("warning")[1].style.visibility = "visible"; // Show the warning to the user
+            document.getElementsByClassName("warning")[1].style.visibility = "visible" // Show the warning to the user
             return
         }
 
@@ -127,8 +131,8 @@ function addEventListeners() {
         if(document.getElementById("player-name").value && document.getElementById("player-email").value) {
             document.getElementById("player-name").style.backgroundColor = "#faebd7"
             document.getElementById("player-email").style.backgroundColor = "#faebd7"
-            document.getElementsByClassName("warning")[0].style.visibility = "hidden";
-            document.getElementsByClassName("warning")[1].style.visibility = "hidden";
+            document.getElementsByClassName("warning")[0].style.visibility = "hidden"
+            document.getElementsByClassName("warning")[1].style.visibility = "hidden"
             showInstructions(FALSE)
             if(soundFlag) playMusic(TRUE)
         }
@@ -151,8 +155,19 @@ function addEventListeners() {
 
      // Add an event listener to skip the current question
      document.getElementById("skip-question").addEventListener("click", function () {
-        console.log("EventListener for skipQuestion()")
         skipQuestion()
+        
+        // Is this the end of the game?
+        if(currentQuestion > MAX_PLAYS) {
+            showScoreboard(TRUE)
+        }
+     })
+
+     // Play again after scoreboard shown
+     document.getElementById("play-again").addEventListener("click", function () {
+        showScoreboard(FALSE)
+        resetGame()
+        showQuestion()
      })
 }
 
@@ -238,8 +253,8 @@ function playMusic(p) {
 //////////////////////////////////////////////////////////////////
 function skipQuestion() {
     // Has the game finished?
-    if (currentQuestion >= 100) {
-        alert("GAME FINISHED")
+    if (currentQuestion >= MAX_PLAYS) {
+        showScoreboard(TRUE)
         return
     } else {
         // NEED A LINE TO REVEAL THE ANSWER
@@ -305,6 +320,28 @@ function encrypt(unencrypted_str) {
 
 function decrypt(encrypted_str) {
     return window.atob(encrypted_str)
+}
+
+function resetGame() {
+    mistakes        = 0
+    currentQuestion = 0
+    skipped         = 0
+}
+
+function showScoreboard(status) {
+    
+    // Populate the game data
+    document.getElementById("reported-total-correct").innerHTML  = (currentQuestion - mistakes - skipped) // Gives correct answers
+    document.getElementById("reported-total-mistakes").innerHTML = mistakes
+    document.getElementById("reported-total-skipped").innerHTML  = skipped
+
+    // Display the scoreboard or not?
+    if(status) {
+        document.getElementById("scoreboard").style.visibility = "visible";
+    }
+    else {
+        document.getElementById("scoreboard").style.visibility = "hidden";
+    }
 }
 
 //////////////////////////////////////////////////////////////////
