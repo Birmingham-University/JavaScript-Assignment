@@ -235,7 +235,6 @@ function playMusic(p) {
 //////////////////////////////////////////////////////////////////
 // The purpose of this function is to enable the user to skip
 // the current question
-//
 //////////////////////////////////////////////////////////////////
 function skipQuestion() {
     // Has the game finished?
@@ -298,6 +297,14 @@ function sendStatement(verb, verbID, object, objectID) {
     catch(e) {
         console.log("Unable to send xAPI statement, returned error: " + e)
     }
+}
+
+function encrypt(unencrypted_str) {
+    return window.btoa(unencrypted_str)
+}
+
+function decrypt(encrypted_str) {
+    return window.atob(encrypted_str)
 }
 
 //////////////////////////////////////////////////////////////////
