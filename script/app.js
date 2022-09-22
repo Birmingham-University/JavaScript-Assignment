@@ -99,6 +99,8 @@ function checkAnswer(i) {
     if ((row * col) == question) {
         playSound(CORRECT)          // Play the 'correct' sound
         buttonPressed.remove()      // Get rid of the current button
+        parent.style.backgroundColor = "lightgreen"
+        parent.style.color = "darkgreen"
         parent.innerHTML = question // Slot the solution in place of the button
         currentQuestion++           // Add one to question counter
         showBoyAvatar(CORRECT)      // Display happy boy avatar
@@ -276,7 +278,12 @@ function skipQuestion() {
         showScoreboard(TRUE)
         return
     } else {
-        // NEED A LINE TO REVEAL THE ANSWER
+        // Reveal the correct answer here
+
+        document.getElementById(answers[currentQuestion]).style.backgroundColor = "#CC0000"
+        document.getElementById(answers[currentQuestion]).style.color = "yellow"
+        document.getElementById(answers[currentQuestion]).innerHTML = answers[currentQuestion] // put the correct answer in teh correct square
+
         showBoyAvatar(SKIPPED)    // Display confused boy avatar
         skipped++
         sendStatement("skipped", "http://id.tincanapi.com/verb/skipped", "Question "+currentQuestion, "http://www.tyrone.bishop/times-table");
