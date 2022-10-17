@@ -113,6 +113,7 @@ function checkAnswer(i) {
         showBoyAvatar(INCORRECT)    // Display sad boy avatar
         showMistakes()              // Display the mistakes count to the user
         if(currentQuestion > MAX_PLAYS) showScoreboard(TRUE) // Is this the end of the game?
+        showQuestion();
     }
 }
 
