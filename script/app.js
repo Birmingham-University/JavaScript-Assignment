@@ -279,12 +279,6 @@ function skipQuestion() {
         showScoreboard(TRUE)
         return
     } else {
-        // Reveal the correct answer here
-
-        document.getElementById(answers[currentQuestion]).style.backgroundColor = "#CC0000"
-        document.getElementById(answers[currentQuestion]).style.color = "yellow"
-        document.getElementById(answers[currentQuestion]).innerHTML = answers[currentQuestion] // put the correct answer in teh correct square
-
         showBoyAvatar(SKIPPED)    // Display confused boy avatar
         skipped++
         sendStatement("skipped", "http://id.tincanapi.com/verb/skipped", "Question "+currentQuestion, "http://www.tyrone.bishop/times-table");
